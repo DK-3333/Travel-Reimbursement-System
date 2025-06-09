@@ -1,138 +1,101 @@
 # Travel-Reimbursement-System
-A three-phase database project that models, queries, and visualizes a university travel reimbursement system using MySQL and Neo4j.
-
-# Flight-Decision-Matrix-Application
-This project explores AI-driven decision support for flight scheduling and compliance management. It includes a prototype system that aids pilot decision-making, ensures regulatory compliance (e.g., CBA rules), and improves operational efficiency tailored to anonymized client needs.
-
-Welcome aboard with our **Pilot Buddy** an AI-powered assistant built for pilots to simplify contract navigation, fatigue tracking, and schedule clarity.
-Think of it as your smart first officer, always on duty, never off course.
+A three-phase database project that models, queries, and visualizes a university travel reimbursement system using MySQL and Neo4j. Key objective is to streamline and manage university employee travel reimbursements through structured relational and graph-based systems.
 
 ## 📚 Table of Contents
 
 - [Overview](#-overview)
-- [Features](#-features)
-- [Project Map](#-project-map)
-- [Relational Schema and EER diagram](#-er-diagram)
-- [How Captain Navigates](#-how-captain-navigates)
-- [Our MVP's Techstack](#-techstack)
-- [Setup Instructions](#-setup-instructions)
-- [Our MVP project UI Demo](#-ui)
-- [Product Strengths & Current Limitations](#-strengths&limitations)
-- [Suggested Technologies](#-suggested-technologies)
-- [Crew & Credits](#-credits)
+- [Project Structure](#-project-structure)
+- [Sample Visuals](#-visuals)
+- [Technologies Used](#-technologies-used)
+- [Key Takeaways](#-key-takeaways)
+- [Reports](#-reports)
+- [Contact Information](#-contact-information)
 
 ---
 
-## 🙌🏻 Overview
-Pilots shouldn’t need to dig through 300-page CBAs mid-duty.
-Our solution helps flight crew query union rules, monitor flight hours, and flag compliance risks, all in plain English.
-
-- Built with love (and LangChain), this system includes:
-- A responsive web interface (via Streamlit)
-- An AI chatbot assistant for CBA guidance
+## 📌 Overview
+This project presents a three-phase implementation of a university Travel Reimbursement System, designed to manage travel approvals, expense reports, reimbursements, and financial oversight. The system transitions from **conceptual modeling in Phase 1**, to **relational schema and SQL queries in Phase 2**, and finally to a **graph database implementation using Neo4j in Phase 3**.
 
 ---
 
-## ⛅ Features
+## 🧱 Project Structure
 
-✅ Natural Language CBA Queries
-✅ Login/Signup Flow with OAuth
-✅ Fatigue Risk Prediction
+# ✅ Phase 1: Conceptual Modeling
+  - Designed a comprehensive **Enhanced Entity Relationship (EER) Diagram** to capture key entities like Department, Employee, Supervisor, Budget Officer, University financial service officer, Travel reports, and Reimbursements.
+  - Focused on disjoint specialization for roles such as UFS Officer, Supervisor, and Budget Officer under the superclass Employee.
+  - Defined all participation and cardinality constraints with precise logic to handle optional and total relationships.
+    
+📌 **Impact** : Built a clean and extensible conceptual foundation to support future relational and graph data models.
 
-✅ Flight vs. Rest Analytics
-✅ Multi-language Support (EN/ES)
-✅ Secure, Airline-themed UI
+# ✅ Phase 2: Relational Database Design
+  - Developed a normalized **MySQL database** using 9 interrelated tables, including junction tables for M:N relationships (e.g., Employee-Department).
+  - Wrote and tested over 10 SQL queries to answer real-world administrative questions such as:\
+    - Which departments spend the most on travel?
+    - Which employees incur the highest travel expenses?
+    - Are actual costs in line with estimates?
+    
+📌 **Impact** : 
+  - Reduced schema complexity by merging redundant entities.
+  - Simplified relationships for better query performance and schema readability.
 
----
+# ✅ Phase 3: Graphical Database Design
+  - Migrated core schema from MySQL to **Neo4j**, using Cypher queries to load nodes and establish key relationships.
+  - Executed advanced Cypher queries for pattern matching, aggregation, and traversal.
+  - Performed delete operations to manage data integrity during iterative testing.
+    
+📌 **Impact** : Graph-based modeling in Neo4j allowed visual traceability from submission to approval and reimbursement, eliminating multi-join complexities in relational systems.
 
-## ✈️ Project Map 
+--- 
 
-```
-/
-|-- AI_chatbot_design.ipynb         # AI chatbot backend code file (Streamlit app)
-|-- app.py                          # Chatbot Interface GUI
-|-- Figma_protoype.pdf              # What you can see (User Interface)
-|-- README.md                       # You be readin’ it now, mate
-```
+## 📊 Sample Visuals
+![EER_diagram](
+<img width="1241" alt="image" src="https://github.com/user-attachments/assets/dc9e90c6-a193-4375-bc04-4e05d89d9931" />
+)
 
-## 🌏 Relational Schema and EER diagram
-![relational_diagram](https://github.com/user-attachments/assets/d70eace4-7791-42aa-913b-84fc7e74a666)
-![er diag](https://github.com/user-attachments/assets/06013461-c637-4206-a2b3-a79eb272980b)
+![relationaldb diagram](
+<img width="488" alt="image" src="https://github.com/user-attachments/assets/302c1bc3-618a-451f-93c6-5e45e8dd9f13" />
+)
 
-## 🗺️ How Captain navigates
-![image](https://github.com/user-attachments/assets/9cd91036-69da-4aea-a900-2bdac3bde98b)
-![image](https://github.com/user-attachments/assets/af528a2c-92b3-479a-8c66-a7ce5a6735e5)
-
-## ⚙️ Our MVP's Techstack
-
-| Layer              | Technology         | Purpose                                                                 |
-|--------------------|--------------------|-------------------------------------------------------------------------|
-| Frontend UI        | **Streamlit**       | Rapid app development for interactive pilot interface                  |
-| UI/UX Design       | **Figma**           | Wireframing and high-fidelity mockups                                  |
-| Backend Logic      | **Python**          | Core app logic, integration, and orchestration                         |
-| NLP + LLM          | **OpenAI GPT-4**    | Understands and responds to pilot queries                              |
-| Chatbot Framework  | **LangChain**       | Orchestrates prompt, retrieval, and response logic                     |
-| Vector Search      | **FAISS**           | Semantic search of CBA documents                                       |
-| Document Parsing   | **AWS Textract**    | Extracts structured text from scanned PDF CBAs                         |
-| Database           | **MySQL**           | Stores flight logs and structured pilot data                           |
-| ETL / Data Sync    | **Airbyte**         | Connects and ingests external data sources                             |
+![graphdb diagram](
+<img width="401" alt="image" src="https://github.com/user-attachments/assets/1da131fe-2d7f-40eb-b2c8-75923a96951b" />
+)
 
 ---
 
-## 🏢 Set up instructions 
+## 🔍 Technologies Used
 
-**Step 1: Upload Project Files**
-Begin by uploading the required backend source code files to your local system or server. The raw text data file used to train the chatbot and app.py file, which contains the Streamlit-based GUI code for the chatbot interface.
+| Technology         | Purpose                                                                 |
+|--------------------|-------------------------------------------------------------------------|
+| **MySQL Workbench** | Relational database design and query execution                         |
+| **Neo4j Desktop**   | Graph database modeling using Cypher                                   |
+| **Draw.io**         | Conceptual modeling and EER diagram design                             |
+| **CSV**             | Intermediate data format for import/export between systems             |
+| **SQL & Cypher**    | Query languages used for data operations and analysis                  |
 
-**Step 2: Run the Chatbot Code**
-Open your code editor and run the chatbot code.
+---
 
-**Step 3: Host the Chatbot on Streamlit**
-Once executed, Streamlit will host the chatbot locally or on your cloud environment.
+## 💡 Key Takeaways
 
-**Step 4: Integrate with Figma Website Prototype**
-Copy the generated Streamlit link and open the Figma website prototype. Then use the Figma embed feature or link placeholder component to integrate the chatbot link within the prototype. Ensure the chatbot is embedded within the desired section or wherever required in the pilot-facing interface.
+- Gained practical experience in database normalization, schema refinement, and constraint handling.
+- Learned how to translate relational models into property graph models for better real-world data mapping.
+- Understood performance trade-offs and schema simplification techniques between database types.
 
-**Step 5: Test the Final Functional Prototype**
-Run or preview the Figma prototype. You should now be able to, Interact with the static website UI. Access the working chatbot directly from the prototype, enabling end-to-end demonstration and functionality testing.
+---
 
-## 📺 Our MVP Project UI Demo
+## 📚 Reports
+Each phase contains a detailed report, diagrams, code snippets, and reflections on modeling decisions:
 
-Here is the [Figma UI Demo](https://www.figma.com/proto/wVMpGCL0WFhtL41Fe2VtGa/BIG_UIDemo_Team2?node-id=0-1&t=B9hqEcNErn9PZ8hc-1) 
+-  
+- Learned how to translate relational models into property graph models for better real-world data mapping.
+- Understood performance trade-offs and schema simplification techniques between database types.
 
-![image](https://github.com/user-attachments/assets/a1147587-2baa-48cc-ab35-208366567c21)
-
-## ✅ Product Strengths & ⚠️ Current Limitations
-
-| Category             | Points                                                                 |
-|----------------------|------------------------------------------------------------------------|
-| ✅ Strength           | Smart CBA Query Handling                                               |
-| ✅ Strength           | Support for Flight Assignment Decisions                                |
-| ✅ Strength           | Clause-Level Information Access                                        |
-| ✅ Strength           | Independent Functionality                                              |
-| ⚠️ Limitation         | Static Sample Data                                                     |
-| ⚠️ Limitation         | Manual Updates for New CBAs                                            |
-| ⚠️ Limitation         | Fatigue Dashboard Based on Assumptions                                 |
-| ⚠️ Limitation         | Limited Training Sources and AI Dependence                             |
-
-## 🔧 Recommended Tech Stack (Long-Term)
-
-| Category          | Recommended Technology                    | Why We Recommend It                                                                 |
-|------------------|-------------------------------------------|-------------------------------------------------------------------------------------|
-| ETL              | Informatica                                | Scalable and robust for enterprise-level data extraction, transformation, and loading |
-| Database         | PostgreSQL                                 | Reliable open-source relational DB with strong support for complex queries and analytics |
-| UI & Stack       | MERN Stack (Mongo, Express, React, Node)   | Enables a responsive, modern, full-stack web application with modular scalability   |
-| Chatbot          | RAG (Retrieval-Augmented Generation)       | Supports contextual and accurate answers using grounding documents like CBAs        |
-| Document Reading | Amazon Textract                            | Extracts structured data from unstructured documents, ideal for reading CBA clauses  |
+---
 
 ## ✨ Contact Information
 
 📬 Contact Author: Dhyey Kasundra
 📧 Email: dhyey.d.kasundra@gmail.com
 
-💡 Early disease detection can help save yields, reduce pesticide use, and promote sustainable agriculture
-
-**Ready to embark on our own CBA documents and scheduling database voyage?**  
-**Let’s touch the sky and beyond!✈️**
+💡 Data is not just stored, it tells a story. This project is where structure meets insight.
 
 ---
