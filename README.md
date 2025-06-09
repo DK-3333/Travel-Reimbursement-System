@@ -20,14 +20,14 @@ This project presents a three-phase implementation of a university Travel Reimbu
 
 ## 🧱 Project Structure
 
-# ✅ Phase 1: Conceptual Modeling
+### ✅ Phase 1: Conceptual Modeling
   - Designed a comprehensive **Enhanced Entity Relationship (EER) Diagram** to capture key entities like Department, Employee, Supervisor, Budget Officer, University financial service officer, Travel reports, and Reimbursements.
   - Focused on disjoint specialization for roles such as UFS Officer, Supervisor, and Budget Officer under the superclass Employee.
   - Defined all participation and cardinality constraints with precise logic to handle optional and total relationships.
     
 📌 **Impact** : Built a clean and extensible conceptual foundation to support future relational and graph data models.
 
-# ✅ Phase 2: Relational Database Design
+### ✅ Phase 2: Relational Database Design
   - Developed a normalized **MySQL database** using 9 interrelated tables, including junction tables for M:N relationships (e.g., Employee-Department).
   - Wrote and tested over 10 SQL queries to answer real-world administrative questions such as:\
     - Which departments spend the most on travel?
@@ -38,7 +38,7 @@ This project presents a three-phase implementation of a university Travel Reimbu
   - Reduced schema complexity by merging redundant entities.
   - Simplified relationships for better query performance and schema readability.
 
-# ✅ Phase 3: Graphical Database Design
+### ✅ Phase 3: Graphical Database Design
   - Migrated core schema from MySQL to **Neo4j**, using Cypher queries to load nodes and establish key relationships.
   - Executed advanced Cypher queries for pattern matching, aggregation, and traversal.
   - Performed delete operations to manage data integrity during iterative testing.
