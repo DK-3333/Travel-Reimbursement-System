@@ -48,9 +48,7 @@ This project presents a three-phase implementation of a university Travel Reimbu
 --- 
 
 ## 📊 Sample Visuals
-![EER_diagram](
-<img width="1241" alt="image" src="https://github.com/user-attachments/assets/dc9e90c6-a193-4375-bc04-4e05d89d9931" />
-)
+![EER Diagram](https://github.com/user-attachments/assets/dc9e90c6-a193-4375-bc04-4e05d89d9931)
 
 ![relationaldb diagram](
 <img width="488" alt="image" src="https://github.com/user-attachments/assets/302c1bc3-618a-451f-93c6-5e45e8dd9f13" />
