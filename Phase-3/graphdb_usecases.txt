@@ -1,0 +1,43 @@
+Graph Update and Delete
+-----------------------------------------------------------------------------------------------
+// Delete Nodes and Relationships
+
+//Delete Submits relationship
+MATCH ()-[r:SUBMITS]->()
+DETACH DELETE r;
+
+//Delete Employee Node
+MATCH (n:Employee)
+DETACH DELETE n;
+
+-----------------------------------------------------------------------------------------------
+
+//Questions and Cypher Queries
+
+//Q1: Find all travel expense reports submitted by a specific employee (e.g., Employee ID 1).
+MATCH (e:Employee {Employee_ID: 1})-[s:SUBMITS]->(p:post_travel)
+RETURN e.FName, e.LName, p.Report_ID, p.Destination, p.Amount, p.Start_Date, p.End_Date
+
+//Q2: Which budget officer reimbursed a specific travel report (e.g., Report ID 5)?
+MATCH (p:post_travel {Report_ID: 5})-[rb:REIMBURSED_BY]->(b:budgetofficer)
+RETURN p.Report_ID, p.Destination, b.BudgetOfficer_ID
+
+//Q3: Find all employees who received a reimbursement processed by a specific budget officer (e.g., Budget Officer ID 10).
+MATCH (b:budgetofficer {BudgetOfficer_ID: 10})<-[pr:PROCESSED_BY]-(r:reimbursement)-[rt:REIMBURSED_TO]->(e:Employee)
+RETURN b.BudgetOfficer_ID, r.Re_ID, r.Amount, e.Employee_ID, e.FName, e.LName
+
+//Q4: List all travel reports with an amount greater than $1200.
+MATCH (p:post_travel)
+WHERE p.Amount > 1200
+RETURN p.Report_ID, p.Destination, p.Amount, p.Description
+
+//Q5: How many reimbursement claims has each budget officer processed?
+MATCH (b:budgetofficer)<-[pr:PROCESSED_BY]-(r:reimbursement)
+RETURN b.BudgetOfficer_ID, COUNT(r) AS NumberOfReimbursementsProcessed
+ORDER BY NumberOfReimbursementsProcessed DESC
+
+
+
+
+
+

@@ -1,0 +1,97 @@
+Creating Nodes and Relationships
+
+------------------------------------------------------------------------------------------------
+// Load Employee Data
+
+CALL {
+    LOAD CSV WITH HEADERS FROM 'file:///employee.csv' AS row
+    WITH row WHERE row.Employee_ID IS NOT NULL
+    MERGE (e:Employee {Employee_ID: toInteger(row.Employee_ID)})
+    SET e.FName = row.FName,
+        e.Minit = row.Minit,
+        e.LName = row.LName,
+        e.Email = row.Email,
+        e.Workstation_address = row.Workstation_address
+}
+
+// Load Post-Travel Expense Report
+
+CALL {
+LOAD CSV WITH HEADERS FROM 'file:///Post_travel_report.csv' AS row
+WITH row WHERE row.Report_ID IS NOT NULL
+MERGE (p:post_travel{Report_ID: toInteger(row.Report_ID)})
+SET
+p.Amount= toFloat(row.Amount),
+p.ReceiptFile= toInteger(row.ReceiptFile),
+p.Vendor_Name= row.Vendor_Name,
+p.Start_Date= datetime(replace(row.Start_Date, ' ', 'T')),
+p.End_Date= datetime(replace(row.End_Date, ' ', 'T')),
+p.Destination= row.Destination,
+p.Description= row.Description,
+p.Insurance_Coverage= row.`Insurance Coverage`,
+p.Hotel_name= row.Hotel_name,
+p.Meal_type= row.Meal_type,
+p.Transportation_Type= row.Transportation_Type
+}
+
+
+// Load Budget Officer Data
+
+CALL {
+LOAD CSV WITH HEADERS FROM 'file:///Budget_Officer.csv' AS row
+WITH row WHERE row.BudgetOfficer_ID IS NOT NULL
+MERGE (b:budgetofficer{BudgetOfficer_ID: toInteger(row.BudgetOfficer_ID)})
+SET
+b.Payment_Date= datetime(replace(row.Payment_Date,' ','T')),
+b.Approval_Auth= toInteger(row.Approval_Auth)
+}
+
+
+// Load Reimbursement Data
+
+CALL {
+LOAD CSV WITH HEADERS FROM 'file:///reimbursement.csv' AS row
+WITH row WHERE row.Re_ID IS NOT NULL
+MERGE (r:reimbursement{Re_ID: toInteger(row.Re_ID)})
+SET
+r.Amount= toFloat(row.Amount),
+r.Date= datetime(replace(row.Date,' ','T'))
+}
+
+------------------------------------------------------------------------------------------------
+
+// Create “Submits” Relationship between Employee and Post-Travel Expense Report
+
+LOAD CSV WITH HEADERS FROM 'file:///Post_travel_report.csv' AS pt
+WITH pt WHERE pt.Employee_ID IS NOT NULL
+MATCH (e:Employee {Employee_ID: toInteger(pt.Employee_ID)})
+MATCH (p:post_travel {Report_ID: toInteger(pt.Report_ID)})
+MERGE (e)-[:SUBMITS]->(p);
+
+// Create “Reimbursed by” Relationship between Post-Travel Expense Report and Budget Officer
+
+LOAD CSV WITH HEADERS FROM 'file:///Post_travel_report.csv' AS pt
+WITH pt WHERE pt.BudgetOfficer_ID IS NOT NULL
+MATCH (b:budgetofficer{BudgetOfficer_ID: toInteger(pt.BudgetOfficer_ID)})
+MATCH (p:post_travel {Report_ID: toInteger(pt.Report_ID)})
+MERGE (p)-[:REIMBURSED_BY]->(b);
+
+// Create “Processed by” Relationship between Budget Officer and Reimbursement
+
+LOAD CSV WITH HEADERS FROM 'file:///reimbursement.csv' AS re
+WITH re WHERE re.BudgetOfficer_ID IS NOT NULL
+MATCH (b:budgetofficer{BudgetOfficer_ID: toInteger(re.BudgetOfficer_ID)})
+MATCH (r:reimbursement {Re_ID: toInteger(re.Re_ID)})
+MERGE (r)-[:PROCESSED_BY]->(b);
+
+// Create “Reimbursed to” Relationship between Reimbursement and Employee
+
+LOAD CSV WITH HEADERS FROM 'file:///reimbursement.csv' AS re
+WITH re WHERE re.Employee_ID IS NOT NULL
+MATCH (e:Employee{Employee_ID: toInteger(re.Employee_ID)})
+MATCH (r:reimbursement {Re_ID: toInteger(re.Re_ID)})
+MERGE (r)-[:REIMBURSED_TO]->(e);
+
+
+
+
