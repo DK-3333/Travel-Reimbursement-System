@@ -87,7 +87,7 @@ Each phase contains a detailed report, diagrams, code snippets, and reflections 
 
 ## ✨ Contact Information
 
-📬 Contact Author: Dhyey Kasundra
+📬 Contact Author: Dhyey Kasundra <br> 
 📧 Email: dhyey.d.kasundra@gmail.com
 
 💡 Data is not just stored, it tells a story. This project is where structure meets insight.
