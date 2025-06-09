@@ -79,9 +79,9 @@ This project presents a three-phase implementation of a university Travel Reimbu
 ## 📚 Reports
 Each phase contains a detailed report, diagrams, code snippets, and reflections on modeling decisions:
 
--  
-- Learned how to translate relational models into property graph models for better real-world data mapping.
-- Understood performance trade-offs and schema simplification techniques between database types.
+- [Phase-1.report](https://github.com/DK-3333/Travel-Reimbursement-System/blob/main/Phase-1/Phase-1_report.pdf)
+- [Phase-2.report](https://github.com/DK-3333/Travel-Reimbursement-System/blob/main/Phase-2/Phase-2_report.pdf)
+- [Phase-3.report](https://github.com/DK-3333/Travel-Reimbursement-System/blob/main/Phase-3/Phase-3_report.pdf)
 
 ---
 
