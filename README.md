@@ -5,7 +5,7 @@ A three-phase database project that models, queries, and visualizes a university
 
 - [Overview](#-overview)
 - [Project Structure](#-project-structure)
-- [Sample Visuals](#-visuals)
+- [Sample Visuals](#-sample-visuals)
 - [Technologies Used](#-technologies-used)
 - [Key Takeaways](#-key-takeaways)
 - [Reports](#-reports)
